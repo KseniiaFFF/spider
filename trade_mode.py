@@ -112,7 +112,7 @@ def place_market_order(api_key, secret_key, symbol, side, quantity):
         "type" : "MARKET",
         "quantity" : qty,
         "timestamp" : get_timestamp(),
-        "recvWindow" : 5000
+        "recvWindow" : 10000
     }
     
     query = "&".join(f"{k}={v}" for k, v in sorted(params.items()))
@@ -209,7 +209,7 @@ def set_leverage(api_key: str, secret_key: str, symbol: str, leverage: int):
         "symbol": symbol,
         "leverage": leverage,
         "timestamp": get_timestamp(),
-        "recvWindow": 5000
+        "recvWindow": 10000
     }
     query = "&".join(f"{k}={v}" for k, v in sorted(params.items()))
     signature = sign(secret_key, query)
@@ -274,7 +274,7 @@ def get_futures_usdt_balance(api_key: str, secret_key: str) -> float:
 
     params = {
         "timestamp": get_timestamp(),
-        "recvWindow": 5000
+        "recvWindow": 10000
     }
 
     query = "&".join(f"{k}={v}" for k, v in sorted(params.items()))
@@ -310,7 +310,7 @@ def get_futures_usdt_balance(api_key: str, secret_key: str) -> float:
 def get_open_position_amt(api_key: str, secret_key: str, symbol: str) -> float:
     params = {
         "timestamp": get_timestamp(),
-        "recvWindow": 5000
+        "recvWindow": 10000
     }
     query = "&".join(f"{k}={v}" for k, v in sorted(params.items()))
     signature = sign(secret_key, query)

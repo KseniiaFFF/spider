@@ -130,6 +130,8 @@ def get_klines(symbol):
             return klines_cache[symbol]
         
     try:
+        time.sleep(0.05)
+        
         url = f"{BASE_URL}/fapi/v1/klines"
         params = {
             "symbol": symbol,
@@ -626,7 +628,8 @@ def monitor_pending_signals():
                             "triggerPrice": adjust_price_precision(symbol, sl),
                             "closePosition": "true",
                             "workingType": "MARK_PRICE",
-                            "timestamp": get_timestamp()
+                            "timestamp": get_timestamp(),
+                            "recvWindow": 10000
                         }
 
                         tp_params = {
@@ -637,7 +640,8 @@ def monitor_pending_signals():
                             "triggerPrice": adjust_price_precision(symbol, tp),
                             "closePosition": "true",
                             "workingType": "MARK_PRICE",
-                            "timestamp": get_timestamp()
+                            "timestamp": get_timestamp(),
+                            "recvWindow": 10000
                         }
                         
                         place_conditional_order(account["api_key"], account["secret_key"], sl_params)

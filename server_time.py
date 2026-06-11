@@ -2,6 +2,7 @@ import time
 import logging
 import requests
 
+
 from config import BASE_URL
 
 logger = logging.getLogger(__name__)
@@ -23,6 +24,16 @@ def sync_time():
     server_time = get_server_time()
     local_time = int(time.time() * 1000)
     time_offset = server_time - local_time
+
+
+def sync_loop():
+    while True:
+        try:
+            sync_time()
+        except Exception:
+            logger.exception("Time sync failed")
+
+        time.sleep(600)
 
 
 def get_timestamp():
